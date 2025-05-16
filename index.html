@@ -140,7 +140,6 @@ const MEM_RANGES = {
   "Xs": { val: "gg.REGION_CODE_SYS", label: "XS (コード・システム)" }
 };
 
-
 function createMenuBlock() {
   const menuDiv = document.createElement("div");
   menuDiv.className = "menu-block";
@@ -173,27 +172,25 @@ function createActionBlock() {
     </label><br>
     
     <label>検索型:</label>
-    <select class="search-type" title="メモリの型(Byte=1,2Bytes=2,...)">
+    <select class="search-type">
       ${Object.entries(TYPES).map(([v, label]) => `<option value="${v}">${label}</option>`).join("")}
     </select><br>
 
-    <label>検索範囲:</label>
+    <label>検索範囲(複数選択可):</label>
     <select class="search-range" multiple>${memOptions}</select><br>
 
     <label>編集値:</label>
     <input type="text" class="edit-value" placeholder="例: 999"><br>
 
     <label>編集方法:</label>
-    <select class="edit-method" title="editAll()かsetValues()かを選択">
+    <select class="edit-method">
       <option value="edit">通常のeditAll()</option>
       <option value="set">setValues()を使う</option>
     </select><br>
 
-    
-
     <div class="set-options" style="display:none;">
       <label>編集型:</label>
-      <select class="edit-type" title="編集時のメモリ型">
+      <select class="edit-type">
         ${Object.entries(TYPES).map(([v, label]) => `<option value="${v}">${label}</option>`).join("")}
       </select><br>
 
@@ -202,13 +199,6 @@ function createActionBlock() {
 
       <label>オフセット(16進数):</label>
       <input type="text" class="offset" placeholder="例: 0x10"><br>
-
-      <label>freeze:</label>
-      <select class="freeze-mode" title="freezeのON/OFF">
-        <option value="none">なし</option>
-        <option value="on">freeze ON</option>
-        <option value="off">freeze OFF</option>
-      </select><br>
     </div>
   `;
   return actionDiv;
@@ -236,7 +226,6 @@ function addActionToMenu(menuBlock) {
   const actionBlock = createActionBlock();
   actionsDiv.appendChild(actionBlock);
 
-  // イベントセット
   actionBlock.querySelector(".delete-action-btn").addEventListener("click", e => deleteAction(e.target));
   actionBlock.querySelector(".edit-method").addEventListener("change", e => toggleSetOptions(e.target));
 }
@@ -246,11 +235,9 @@ function addMenu() {
   const menuBlock = createMenuBlock();
   menusDiv.appendChild(menuBlock);
 
-  // イベントセット
   menuBlock.querySelector(".delete-menu-btn").addEventListener("click", e => deleteMenu(e.target));
   menuBlock.querySelector(".add-action-btn").addEventListener("click", e => addActionToMenu(menuBlock));
 
-  // 最低1つアクションを追加しておく
   addActionToMenu(menuBlock);
 }
 
@@ -264,9 +251,9 @@ function generateScript() {
   let script = "menu = gg.choice({\n";
   menus.forEach((m, idx) => {
     const name = m.querySelector(".menu-name").value.trim() || "(無題)";
-    script += `  "${name}"${idx < menus.length -1 ? "," : ""}\n`;
+    script += `  "${name}",\n`;
   });
-  script += `}, nil, "@kiyu4776")\n\n`;
+  script += `  "終了"\n}, nil, "@kiyu4776")\n\n`;
 
   script += `if menu == nil then return end\n\n`;
 
@@ -276,8 +263,7 @@ function generateScript() {
 
     const actions = menuBlock.querySelectorAll(".action-block");
     if (actions.length === 0) {
-      script += `  gg.toast("アクションがありません")\n`;
-      script += `  return\n`;
+      script += `  gg.toast("アクションがありません")\n  return\n`;
       return;
     }
 
@@ -299,15 +285,11 @@ function generateScript() {
 
       let rangeExpr = ranges.map(r => MEM_RANGES[r].val).join(" | ");
 
-      if (clearResultsChecked) {
-        script += `  gg.clearResults()\n`;
-      }
+      if (clearResultsChecked) script += `  gg.clearResults()\n`;
       script += `  gg.setRanges(${rangeExpr})\n`;
       script += `  gg.searchNumber("${searchVal}", ${searchType})\n`;
       script += `  local results = gg.getResultsCount()\n`;
-      script += `  if results == 0 then\n`;
-      script += `    gg.toast("検索結果0 件")\n`;
-      script += `  else\n`;
+      script += `  if results == 0 then\n    gg.toast("検索結果0 件")\n  else\n`;
 
       if (editMethod === "edit") {
         script += `    gg.editAll(${editVal})\n`;
@@ -316,41 +298,31 @@ function generateScript() {
         const count = parseInt(a.querySelector(".count").value, 10) || 100;
         const offsetStr = a.querySelector(".offset").value.trim();
         const offset = offsetStr ? parseInt(offsetStr, 16) : 0;
-        const freezeMode = a.querySelector(".freeze-mode").value;
 
         script += `    local t = gg.getResults(${count})\n`;
         script += `    for i = 1, #t do\n`;
-        if (offset !== 0) {
-          script += `      t[i].address = t[i].address + ${offset}\n`;
-        }
+        if (offset !== 0) script += `      t[i].address = t[i].address + ${offset}\n`;
         script += `      t[i].value = "${editVal}"\n`;
         script += `      t[i].flags = ${editType}\n`;
         script += `    end\n`;
         script += `    gg.setValues(t)\n`;
-
-        if (freezeMode === "on") {
-          script += `    gg.addListItems(t)\n`;
-          script += `    gg.freeze(true)\n`;
-        } else if (freezeMode === "off") {
-          script += `    gg.removeListItems(t)\n`;
-          script += `    gg.freeze(false)\n`;
-        }
       }
-
       script += `  end\n`;
     });
-
   });
+
+  // 「終了」メニュー
+  script += `elseif menu == ${menus.length + 1} then\n`;
+  script += ` gg.toast("終了...)\n  os.exit()\n`;
+
   script += "end\n";
 
   document.getElementById("output").value = script;
 }
 
-// 初期化
+
 document.getElementById("addMenuBtn").addEventListener("click", addMenu);
 document.getElementById("generateBtn").addEventListener("click", generateScript);
-
-// 最初にメニュー1つ作る
 addMenu();
 </script>
 
