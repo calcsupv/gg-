@@ -301,7 +301,7 @@ function generateScript() {
       if (clearResultsChecked) script += `  gg.clearResults()\n`;
       script += `  gg.setRanges(${rangeExpr})\n`;
       script += `  gg.searchNumber("${searchVal}", ${searchType})\n`;
-      script += `  local results = gg.getResultsCount()\n`;
+      script += `  local results = gg.getResults(99999)\n`;
       script += `  if results == 0 then\n    gg.toast("検索結果0 件")\n  else\n`;
 
       if (editMethod === "edit") {
