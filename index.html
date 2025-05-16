@@ -104,6 +104,16 @@
   .delete-menu-btn:hover {
     background: #bf5900;
   }
+
+  #copyBtn {
+  background: #28a745;
+  margin-top: 10px;
+  font-weight: bold;
+}
+#copyBtn:hover {
+  background: #218838;
+}
+
 </style>
 </head>
 <body>
@@ -117,6 +127,7 @@
 
 <label style="display:block; margin-top: 20px; font-weight:700;">生成されたスクリプト</label>
 <textarea id="output" readonly></textarea>
+<button id="copyBtn">📋 コピー</button>
 
 <script>
 const TYPES = {
@@ -176,7 +187,7 @@ function createActionBlock() {
       ${Object.entries(TYPES).map(([v, label]) => `<option value="${v}">${label}</option>`).join("")}
     </select><br>
 
-    <label>検索範囲:</label>
+    <label>検索範囲(複数選択可):</label>
     <select class="search-range" multiple>${memOptions}</select><br>
 
     <label>編集値:</label>
@@ -203,6 +214,8 @@ function createActionBlock() {
   `;
   return actionDiv;
 }
+
+
 
 function toggleSetOptions(selectElem) {
   const setOpts = selectElem.closest(".action-block").querySelector(".set-options");
@@ -326,6 +339,13 @@ function generateScript() {
 document.getElementById("addMenuBtn").addEventListener("click", addMenu);
 document.getElementById("generateBtn").addEventListener("click", generateScript);
 addMenu();
+document.getElementById("copyBtn").addEventListener("click", () => {
+    const output = document.getElementById("output");
+    output.select();
+    output.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    alert("スクリプトをコピーしました！");
+  });
 </script>
 
 </body>
