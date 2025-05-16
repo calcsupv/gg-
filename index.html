@@ -292,8 +292,10 @@ function generateScript() {
       script += `  if results == 0 then\n    gg.toast("検索結果0 件")\n  else\n`;
 
       if (editMethod === "edit") {
-        script += `    gg.editAll(${editVal})\n`;
-      } else {
+  const editType = a.querySelector(".edit-type").value;
+  script += `    gg.editAll("${editVal}", ${searchType})\n`;
+}
+ else {
         const editType = a.querySelector(".edit-type").value;
         const count = parseInt(a.querySelector(".count").value, 10) || 100;
         const offsetStr = a.querySelector(".offset").value.trim();
