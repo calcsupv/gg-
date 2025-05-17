@@ -195,8 +195,8 @@ function createActionBlock() {
 
     <label>編集方法:</label>
     <select class="edit-method">
-      <option value="edit">通常のeditAll()</option>
-      <option value="set">setValues()を使う</option>
+      <option value="edit">editAll()</option>
+      <option value="set">setValues()</option>
     </select><br>
 
     <div class="set-options" style="display:none;">
@@ -263,7 +263,7 @@ function generateScript() {
 
   let script = "menu = gg.choice({\n";
   menus.forEach((m, idx) => {
-    const name = m.querySelector(".menu-name").value.trim() || "(無題)";
+    const name = m.querySelector(".menu-name").value.trim() || "nil";
     script += `  "${name}",\n`;
   });
   script += `  "終了"\n}, nil, "@kiyu4776")\n\n`;
@@ -301,7 +301,7 @@ function generateScript() {
       if (clearResultsChecked) script += `  gg.clearResults()\n`;
       script += `  gg.setRanges(${rangeExpr})\n`;
       script += `  gg.searchNumber("${searchVal}", ${searchType})\n`;
-      script += `  local results = gg.getResultsCount()\n`;
+      script += `  local results = gg.getResults(9999)\n`;
       script += `  if results == 0 then\n    gg.toast("検索結果0 件")\n  else\n`;
 
       if (editMethod === "edit") {
