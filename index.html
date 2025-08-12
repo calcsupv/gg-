@@ -169,7 +169,7 @@ function createMenuBlock() {
   menuDiv.innerHTML = `
     <button class="delete-menu-btn" title="このメニューを削除">×</button>
     <label>メニュー名:</label>
-    <input type="text" class="menu-name" placeholder="例: 無限HP"><br>
+    <input type="text" class="menu-name" placeholder="例: メニュー1"><br>
     <div class="actions"></div>
     <button class="add-action-btn">＋ 検索・編集を追加</button>
   `;
@@ -314,7 +314,7 @@ function generateScript() {
       script += `  gg.setRanges(${rangeExpr})\n`;
       script += `  gg.searchNumber("${searchVal}", ${searchType})\n`;
       script += `  local results = gg.getResults(9999)\n`;
-      script += `  if results == 0 then\n    gg.toast("検索結果0 件")\n  else\n`;
+      script += `  if results == 0 then\nelse\n`;
 
       if (editMethod === "edit") {
   const editType = a.querySelector(".edit-type").value;
