@@ -1,119 +1,155 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8" />
-<style>
-  body { font-family: sans-serif; margin: 20px; background:#f5f7fa; color:#222; }
-  h1 { font-weight: 700; color: #3a3a3a; }
-  .menu-block {
-    background: #fff; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    padding: 15px; margin-bottom: 20px;
-    position: relative;
-  }
-  .action-block {
-    background: #fafafa; border: 1px solid #ddd; border-radius: 6px;
-    padding: 12px; margin: 10px 0; position: relative;
-  }
-  label {
-    display: inline-block;
-    width: 130px;
-    font-weight: 600;
-    vertical-align: top;
-    margin-top: 6px;
-    color: #555;
-  }
-  input[type=text], input[type=number], select {
-    width: calc(100% - 140px);
-    padding: 6px 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  select[multiple] {
-    height: 90px;
-    width: calc(100% - 140px);
-  }
-  button {
-    background: #007acc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s;
-  }
-  button:hover {
-    background: #005fa3;
-  }
-  textarea {
-    width: 100%;
-    height: 300px;
-    font-family: monospace;
-    font-size: 14px;
-    margin-top: 20px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    resize: vertical;
-  }
-  .set-options {
-    margin-left: 140px;
-    margin-top: 10px;
-  }
-  .delete-action-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: #d9534f;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: center;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: background 0.3s;
-  }
-  .delete-action-btn:hover {
-    background: #c9302c;
-  }
-  .delete-menu-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: #e67300;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: center;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: background 0.3s;
-  }
-  .delete-menu-btn:hover {
-    background: #bf5900;
-  }
 
-  #copyBtn {
-  background: #28a745;
-  margin-top: 10px;
-  font-weight: bold;
-}
-#copyBtn:hover {
-  background: #218838;
-}
- .version {
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #3a3a3a;
+        }
+
+        .menu-block {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .action-block {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        label {
+            display: inline-block;
+            width: 130px;
+            font-weight: 600;
+            vertical-align: top;
+            margin-top: 6px;
+            color: #555;
+        }
+
+        input[type=text],
+        input[type=number],
+        select {
+            width: calc(100% - 140px);
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        select[multiple] {
+            height: 90px;
+            width: calc(100% - 140px);
+        }
+
+        button {
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #005fa3;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 14px;
+            margin-top: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            resize: vertical;
+        }
+
+        .set-options {
+            margin-left: 140px;
+            margin-top: 10px;
+        }
+
+        .delete-action-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #d9534f;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 20px;
+            text-align: center;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .delete-action-btn:hover {
+            background: #c9302c;
+        }
+
+        .delete-menu-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #e67300;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 20px;
+            text-align: center;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .delete-menu-btn:hover {
+            background: #bf5900;
+        }
+
+        #copyBtn {
+            background: #28a745;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #copyBtn:hover {
+            background: #218838;
+        }
+        .nil {
+            display: none;
+        } 
+        .version {
             position: fixed;
             bottom: 10px;
             right: 10px;
@@ -123,68 +159,68 @@
             padding: 5px 10px;
             border-radius: 5px;
         }
-
-</style>
+    </style>
 </head>
+
 <body>
+<div class="nil">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+    <h1>@kiyu4776</h1>
 
-<h1>@kiyu4776</h1>
+    <div class="version">v1.0.0</div>
 
-<div class="version">v1.0.0</div>
+    <button id="addMenuBtn">+ メニューを追加</button>
+    <button id="generateBtn">+ スクリプト生成</button>
 
-<button id="addMenuBtn">＋ メニューを追加</button>
-<button id="generateBtn">🎮 スクリプト生成</button>
+    <div id="menus"></div>
 
-<div id="menus"></div>
+    <label style="display:block; margin-top: 20px; font-weight:700;">生成されたスクリプト</label>
+    <textarea id="output" readonly></textarea>
+    <button id="copyBtn">コピー</button>
 
-<label style="display:block; margin-top: 20px; font-weight:700;">生成されたスクリプト</label>
-<textarea id="output" readonly></textarea>
-<button id="copyBtn">📋 コピー</button>
+    <script>
+        const TYPES = {
+            "1": "Byte",
+            "2": "Word",
+            "4": "Dword",
+            "8": "Qword",
+            "16": "Float",
+            "32": "Double"
+        };
 
-<script>
-const TYPES = {
-  "1": "Byte",
-  "2": "Word",
-  "4": "Dword",
-  "8": "Qword",
-  "16": "Float",
-  "32": "Double"
-};
+        const MEM_RANGES = {
+            "A": { val: "gg.REGION_ANONYMOUS", label: "A" },
+            "jh": { val: "gg.REGION_JAVA_HEAP", label: "Jh" },
+            "Ch": { val: "gg.REGION_C_HEAP", label: "Ch" },
+            "Ca": { val: "gg.REGION_C_ALLOC", label: "Ca" },
+            "PS": { val: "gg.REGION_PPSSPP", label: "PS" },
+            "O": { val: "gg.REGION_OTHER", label: "O" },
+            "B": { val: "gg.REGION_BAD", label: "B" },
+            "Xa": { val: "gg.REGION_CODE_APP", label: "XA" },
+            "Xs": { val: "gg.REGION_CODE_SYS", label: "XS" }
+        };
 
-const MEM_RANGES = {
-  "A":  { val: "gg.REGION_ANONYMOUS", label: "A" },
-  "jh": { val: "gg.REGION_JAVA_HEAP", label: "Jh" },
-  "Ch": { val: "gg.REGION_C_HEAP", label: "Ch" },
-  "Ca": { val: "gg.REGION_C_ALLOC", label: "Ca" },
-  "PS": { val: "gg.REGION_PPSSPP", label: "PS" },
-  "O":  { val: "gg.REGION_OTHER", label: "O" },
-  "B":  { val: "gg.REGION_BAD", label: "B" },
-  "Xa": { val: "gg.REGION_CODE_APP", label: "XA" },
-  "Xs": { val: "gg.REGION_CODE_SYS", label: "XS" }
-};
-
-function createMenuBlock() {
-  const menuDiv = document.createElement("div");
-  menuDiv.className = "menu-block";
-  menuDiv.innerHTML = `
+        function createMenuBlock() {
+            const menuDiv = document.createElement("div");
+            menuDiv.className = "menu-block";
+            menuDiv.innerHTML = `
     <button class="delete-menu-btn" title="このメニューを削除">×</button>
     <label>メニュー名:</label>
     <input type="text" class="menu-name" placeholder="例: メニュー1"><br>
     <div class="actions"></div>
     <button class="add-action-btn">＋ 検索・編集を追加</button>
   `;
-  return menuDiv;
-}
+            return menuDiv;
+        }
 
-function createActionBlock() {
-  let memOptions = "";
-  for (const key in MEM_RANGES) {
-    memOptions += `<option value="${key}">${MEM_RANGES[key].label}</option>`;
-  }
+        function createActionBlock() {
+            let memOptions = "";
+            for (const key in MEM_RANGES) {
+                memOptions += `<option value="${key}">${MEM_RANGES[key].label}</option>`;
+            }
 
-  const actionDiv = document.createElement("div");
-  actionDiv.className = "action-block";
-  actionDiv.innerHTML = `
+            const actionDiv = document.createElement("div");
+            actionDiv.className = "action-block";
+            actionDiv.innerHTML = `
     <button class="delete-action-btn" title="このアクションを削除">×</button>
 
     <label>検索値:</label>
@@ -220,145 +256,156 @@ function createActionBlock() {
       <label>編集件数:</label>
       <input type="number" class="count" min="1" value="100"><br>
 
-      <label>オフセット(16進数):</label>
+      <label>オフセット</label>
       <input type="text" class="offset" placeholder="例: 0x10"><br>
     </div>
   `;
-  return actionDiv;
-}
+            return actionDiv;
+        }
+
+        function toggleSetOptions(selectElem) {
+            const setOpts = selectElem.closest(".action-block").querySelector(".set-options");
+            setOpts.style.display = selectElem.value === "set" ? "block" : "none";
+        }
+
+        function deleteAction(btn) {
+            if (confirm("この検索・編集を削除しますか？")) {
+                btn.closest(".action-block").remove();
+            }
+        }
+
+        function deleteMenu(btn) {
+            if (confirm("このメニューを削除しますか？")) {
+                btn.closest(".menu-block").remove();
+            }
+        }
+
+        function addActionToMenu(menuBlock) {
+            const actionsDiv = menuBlock.querySelector(".actions");
+            const actionBlock = createActionBlock();
+            actionsDiv.appendChild(actionBlock);
+
+            actionBlock.querySelector(".delete-action-btn").addEventListener("click", e => deleteAction(e.target));
+            actionBlock.querySelector(".edit-method").addEventListener("change", e => toggleSetOptions(e.target));
+        }
+
+        function addMenu() {
+            const menusDiv = document.getElementById("menus");
+            const menuBlock = createMenuBlock();
+            menusDiv.appendChild(menuBlock);
+
+            menuBlock.querySelector(".delete-menu-btn").addEventListener("click", e => deleteMenu(e.target));
+            menuBlock.querySelector(".add-action-btn").addEventListener("click", e => addActionToMenu(menuBlock));
+
+            addActionToMenu(menuBlock);
+        }
+
+        function generateScript() {
+            const menus = document.querySelectorAll(".menu-block");
+            if (menus.length === 0) {
+                alert("メニューを1つ以上追加してください");
+                return;
+            }
+
+            let script = "";
+            script += "-- @kiyu4776\n";
+            script += "-- 無料で使わせてるんだから消すな\n";
+            script += "function Main()\n";
+            script += "  menu = gg.choice({\n";
+            menus.forEach((m, idx) => {
+                const name = m.querySelector(".menu-name").value.trim() || "メニュー " + (idx + 1);
+                script += `    "${name}",\n`;
+            });
+            script += `    "終了"\n  }, nil, "スクリプト")\n\n`;
+            script += `  if menu == nil then return end\n\n`;
+
+            menus.forEach((menuBlock, i) => {
+                script += (i === 0 ? "  if" : "  elseif") + ` menu == ${i + 1} then\n`;
+                script += `    -- ${menuBlock.querySelector(".menu-name").value.trim() || "(無題)"}\n`;
+
+                const actions = menuBlock.querySelectorAll(".action-block");
+                if (actions.length === 0) {
+                    script += `    gg.toast("アクションがありません")\n    return\n`;
+                } else {
+                    actions.forEach((a) => {
+                        const searchVal = a.querySelector(".search-value").value.trim();
+                        if (!searchVal) {
+                            script += `    -- !検索値が空\n`;
+                            return;
+                        }
+                        const searchType = a.querySelector(".search-type").value;
+                        const ranges = Array.from(a.querySelector(".search-range").selectedOptions).map(o => o.value);
+                        if (ranges.length === 0) {
+                            script += `    -- !検索範囲が未選択\n`;
+                            return;
+                        }
+                        const editVal = a.querySelector(".edit-value").value.trim();
+                        const editMethod = a.querySelector(".edit-method").value;
+                        const clearResultsChecked = a.querySelector(".clear-results").checked;
+
+                        let rangeExpr = ranges.map(r => MEM_RANGES[r].val).join(" | ");
+
+                        if (clearResultsChecked) script += `    gg.clearResults()\n`;
+                        script += `    gg.setRanges(${rangeExpr})\n`;
+                        script += `    gg.searchNumber("${searchVal}", ${searchType})\n`;
+                        script += `    local results = gg.getResults(9999)\n`;
+                        script += `    if #results == 0 then\n      gg.toast("結果が見つかりませんでした")\n    else\n`;
+
+                        if (editMethod === "edit") {
+                            script += `      gg.editAll("${editVal}", ${searchType})\n`;
+                        } else {
+                            const editType = a.querySelector(".edit-type").value;
+                            const count = parseInt(a.querySelector(".count").value, 10) || 100;
+                            const offsetStr = a.querySelector(".offset").value.trim();
+                            const offset = offsetStr ? parseInt(offsetStr, 16) : 0;
+
+                            script += `      local t = gg.getResults(${count})\n`;
+                            script += `      for i = 1, #t do\n`;
+                            if (offset !== 0) script += `        t[i].address = t[i].address + ${offset}\n`;
+                            script += `        t[i].value = "${editVal}"\n`;
+                            script += `        t[i].flags = ${editType}\n`;
+                            script += `      end\n`;
+                            script += `      gg.setValues(t)\n`;
+                        }
+                        script += `      gg.toast("編集完了")\n`;
+                        script += `    end\n`;
+                    });
+                }
+                script += `  `;
+            });
+
+            // 「終了」メニュー
+            script += `  elseif menu == ${menus.length + 1} then\n`;
+            script += `    gg.toast("終了中...")\n    os.exit()\n`;
+            script += "  end\n";
+            script += "end\n";
+            script += "while true do\n"
+            script += "  if gg.isVisible(true) then\n"
+            script += "    Lext = 1\n"
+            script += "    gg.setVisible(false)\n"
+            script += "  end\n"
+            script += "  if Lext == 1 then\n"
+            script += "    Main()\n"
+            script += "    Lext = -1\n"
+            script += "  end\n"
+            script += "end\n"
 
 
+            document.getElementById("output").value = script;
+        }
 
-function toggleSetOptions(selectElem) {
-  const setOpts = selectElem.closest(".action-block").querySelector(".set-options");
-  setOpts.style.display = selectElem.value === "set" ? "block" : "none";
-}
-
-function deleteAction(btn) {
-  if (confirm("この検索・編集を削除しますか？")) {
-    btn.closest(".action-block").remove();
-  }
-}
-
-function deleteMenu(btn) {
-  if (confirm("このメニューを削除しますか？")) {
-    btn.closest(".menu-block").remove();
-  }
-}
-
-function addActionToMenu(menuBlock) {
-  const actionsDiv = menuBlock.querySelector(".actions");
-  const actionBlock = createActionBlock();
-  actionsDiv.appendChild(actionBlock);
-
-  actionBlock.querySelector(".delete-action-btn").addEventListener("click", e => deleteAction(e.target));
-  actionBlock.querySelector(".edit-method").addEventListener("change", e => toggleSetOptions(e.target));
-}
-
-function addMenu() {
-  const menusDiv = document.getElementById("menus");
-  const menuBlock = createMenuBlock();
-  menusDiv.appendChild(menuBlock);
-
-  menuBlock.querySelector(".delete-menu-btn").addEventListener("click", e => deleteMenu(e.target));
-  menuBlock.querySelector(".add-action-btn").addEventListener("click", e => addActionToMenu(menuBlock));
-
-  addActionToMenu(menuBlock);
-}
-
-function generateScript() {
-  const menus = document.querySelectorAll(".menu-block");
-  if (menus.length === 0) {
-    alert("メニューを1つ以上追加してください");
-    return;
-  }
-
-  let script = "menu = gg.choice({\n";
-  menus.forEach((m, idx) => {
-    const name = m.querySelector(".menu-name").value.trim() || "nil";
-    script += `  "${name}",\n`;
-  });
-  script += `  "終了"\n}, nil, "@kiyu4776")\n\n`;
-
-  script += `if menu == nil then return end\n\n`;
-
-  menus.forEach((menuBlock, i) => {
-    script += (i === 0 ? "if" : "elseif") + ` menu == ${i + 1} then\n`;
-    script += `  -- ${menuBlock.querySelector(".menu-name").value.trim() || "(無題)"}\n`;
-
-    const actions = menuBlock.querySelectorAll(".action-block");
-    if (actions.length === 0) {
-      script += `  gg.toast("アクションがありません")\n  return\n`;
-      return;
-    }
-
-    actions.forEach((a) => {
-      const searchVal = a.querySelector(".search-value").value.trim();
-      if (!searchVal) {
-        script += `  -- 検索値が空のためスキップ\n`;
-        return;
-      }
-      const searchType = a.querySelector(".search-type").value;
-      const ranges = Array.from(a.querySelector(".search-range").selectedOptions).map(o => o.value);
-      if (ranges.length === 0) {
-        script += `  -- 検索範囲が未選択のためスキップ\n`;
-        return;
-      }
-      const editVal = a.querySelector(".edit-value").value.trim();
-      const editMethod = a.querySelector(".edit-method").value;
-      const clearResultsChecked = a.querySelector(".clear-results").checked;
-
-      let rangeExpr = ranges.map(r => MEM_RANGES[r].val).join(" | ");
-
-      if (clearResultsChecked) script += `  gg.clearResults()\n`;
-      script += `  gg.setRanges(${rangeExpr})\n`;
-      script += `  gg.searchNumber("${searchVal}", ${searchType})\n`;
-      script += `  local results = gg.getResults(9999)\n`;
-      script += `  if results == 0 then\nelse\n`;
-
-      if (editMethod === "edit") {
-  const editType = a.querySelector(".edit-type").value;
-  script += `    gg.editAll("${editVal}", ${searchType})\n`;
-}
- else {
-        const editType = a.querySelector(".edit-type").value;
-        const count = parseInt(a.querySelector(".count").value, 10) || 100;
-        const offsetStr = a.querySelector(".offset").value.trim();
-        const offset = offsetStr ? parseInt(offsetStr, 16) : 0;
-
-        script += `    local t = gg.getResults(${count})\n`;
-        script += `    for i = 1, #t do\n`;
-        if (offset !== 0) script += `      t[i].address = t[i].address + ${offset}\n`;
-        script += `      t[i].value = "${editVal}"\n`;
-        script += `      t[i].flags = ${editType}\n`;
-        script += `    end\n`;
-        script += `    gg.setValues(t)\n`;
-      }
-      script += `  end\n`;
-    });
-  });
-
-  // 「終了」メニュー
-  script += `elseif menu == ${menus.length + 1} then\n`;
-  script += ` gg.toast("終了...)\n  os.exit()\n`;
-
-  script += "end\n";
-
-  document.getElementById("output").value = script;
-}
-
-
-document.getElementById("addMenuBtn").addEventListener("click", addMenu);
-document.getElementById("generateBtn").addEventListener("click", generateScript);
-addMenu();
-document.getElementById("copyBtn").addEventListener("click", () => {
-    const output = document.getElementById("output");
-    output.select();
-    output.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    alert("スクリプトをコピーしました！");
-  });
-</script>
+        document.getElementById("addMenuBtn").addEventListener("click", addMenu);
+        document.getElementById("generateBtn").addEventListener("click", generateScript);
+        addMenu();
+        document.getElementById("copyBtn").addEventListener("click", () => {
+            const output = document.getElementById("output");
+            output.select();
+            output.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("スクリプトをコピーしました！");
+        });
+    </script>
 
 </body>
+
 </html>
