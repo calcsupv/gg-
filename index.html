@@ -380,6 +380,22 @@
             document.getElementById("output").value = script;
         }
 
+                    // 「終了」メニュー
+            script += `  elseif menu == ${menus.length + 1} then\n`;
+            script += `    gg.toast("終了中...")\n    os.exit()\n`;
+            script += "  end\n";
+            script += "end\n";
+            script += "while true do\n"
+            script += "  if gg.isVisible(true) then\n"
+            script += "    Lext = 1\n"
+            script += "    gg.setVisible(false)\n"
+            script += "  end\n"
+            script += "  if Lext == 1 then\n"
+            script += "    Main()\n"
+            script += "    Lext = -1\n"
+            script += "  end\n"
+            script += "end\n"
+            
         document.getElementById("addMenuBtn").addEventListener("click", addMenu);
         document.getElementById("generateBtn").addEventListener("click", generateScript);
         addMenu();
