@@ -201,7 +201,7 @@
             "Xs": { val: "gg.REGION_CODE_SYS", label: "XS" }
         };
 
-        function createMenuBlock() {
+        function DeleteMenu() {
             const menuDiv = document.createElement("div");
             menuDiv.className = "menu-block";
             menuDiv.innerHTML = `
@@ -214,7 +214,7 @@
             return menuDiv;
         }
 
-        function createActionBlock() {
+        function ActionBlock() {
             let memOptions = "";
             for (const key in MEM_RANGES) {
                 memOptions += `<option value="${key}">${MEM_RANGES[key].label}</option>`;
@@ -284,7 +284,7 @@
 
         function addActionToMenu(menuBlock) {
             const actionsDiv = menuBlock.querySelector(".actions");
-            const actionBlock = createActionBlock();
+            const actionBlock = ActionBlock();
             actionsDiv.appendChild(actionBlock);
 
             actionBlock.querySelector(".delete-action-btn").addEventListener("click", e => deleteAction(e.target));
@@ -293,7 +293,7 @@
 
         function addMenu() {
             const menusDiv = document.getElementById("menus");
-            const menuBlock = createMenuBlock();
+            const menuBlock = DeleteMenu();
             menusDiv.appendChild(menuBlock);
 
             menuBlock.querySelector(".delete-menu-btn").addEventListener("click", e => deleteMenu(e.target));
@@ -375,22 +375,6 @@
                 }
                 script += `  `;
             });
-
-            // 「終了」メニュー
-            script += `  elseif menu == ${menus.length + 1} then\n`;
-            script += `    gg.toast("終了中...")\n    os.exit()\n`;
-            script += "  end\n";
-            script += "end\n";
-            script += "while true do\n"
-            script += "  if gg.isVisible(true) then\n"
-            script += "    Lext = 1\n"
-            script += "    gg.setVisible(false)\n"
-            script += "  end\n"
-            script += "  if Lext == 1 then\n"
-            script += "    Main()\n"
-            script += "    Lext = -1\n"
-            script += "  end\n"
-            script += "end\n"
 
 
             document.getElementById("output").value = script;
